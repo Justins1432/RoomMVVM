@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.AddAuthorActivity"
+    android:background="@color/teal_700"
+    android:orientation="vertical">
+
+    <EditText
+        android:id="@+id/addSurname"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Фамилия"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
+        android:layout_marginRight="5dp"
+        android:layout_marginLeft="5dp" />
+
+    <EditText
+        android:id="@+id/addName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Имя"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"/>
+
+    <EditText
+        android:id="@+id/addPatronymic"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Отчество"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"/>
+
+    <Button
+        android:id="@+id/btnAddAuthor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:textAllCaps="false" />
+
+</LinearLayout>
