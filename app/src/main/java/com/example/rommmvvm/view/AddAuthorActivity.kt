@@ -17,7 +17,7 @@ class AddAuthorActivity : AppCompatActivity() {
     private lateinit var inpPatronymic: EditText
     private lateinit var btnAdd: Button
     private lateinit var viewModel: AuthorViewModel
-    private var idAuthor: Long = -1
+    private var idAuthor: Long = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
