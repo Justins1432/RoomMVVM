@@ -18,10 +18,10 @@ class AuthorAdapter(
     private val authorlist = ArrayList<Author>()
 
     inner class AuthorViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val surnameAuthor = itemView.findViewById<TextView>(R.id.txtSurname)
-        val nameAuthor = itemView.findViewById<TextView>(R.id.txtName)
-        val patronymicAuthor = itemView.findViewById<TextView>(R.id.txtPatronymic)
-        val deleteAuthor = itemView.findViewById<ImageView>(R.id.dltEntry)
+        val surnameAuthor: TextView = itemView.findViewById<TextView>(R.id.txtSurname)
+        val nameAuthor: TextView = itemView.findViewById<TextView>(R.id.txtName)
+        val patronymicAuthor: TextView = itemView.findViewById<TextView>(R.id.txtPatronymic)
+        val deleteAuthor: ImageView = itemView.findViewById<ImageView>(R.id.dltEntry)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AuthorViewHolder {
@@ -36,7 +36,10 @@ class AuthorAdapter(
         holder.patronymicAuthor.text = authorlist[position].patronymic
 
         holder.deleteAuthor.setOnClickListener{
+            val layoutPosition = holder.layoutPosition
             authorClickDelete.onDeleteIconClick(authorlist[position])
+            authorlist.removeAt(layoutPosition)
+            notifyItemRemoved(layoutPosition)
         }
 
         holder.itemView.setOnClickListener {
@@ -53,6 +56,11 @@ class AuthorAdapter(
         authorlist.addAll(updList)
         notifyDataSetChanged()
     }
+
+    /*fun removeItem(position: Int){
+        authorlist.remove(position)
+
+    }*/
 
 }
 

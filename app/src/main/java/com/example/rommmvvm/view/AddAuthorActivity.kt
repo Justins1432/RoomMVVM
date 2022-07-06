@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import com.example.rommmvvm.R
 import com.example.rommmvvm.model.Author
+import com.example.rommmvvm.util.Constants
 import com.example.rommmvvm.viewmodel.AuthorViewModel
 
 class AddAuthorActivity : AppCompatActivity() {
@@ -23,6 +24,7 @@ class AddAuthorActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_author)
         initComponents()
+        initListener()
     }
 
     private fun initComponents() {
@@ -30,22 +32,19 @@ class AddAuthorActivity : AppCompatActivity() {
         inpName = findViewById(R.id.addName)
         inpPatronymic = findViewById(R.id.addPatronymic)
         btnAdd = findViewById(R.id.btnAddAuthor)
-
         viewModel = ViewModelProvider(
             this,
             ViewModelProvider.AndroidViewModelFactory.getInstance(application)
         )[AuthorViewModel::class.java]
-
-        initUpdateAndAddAuthor()
     }
 
-    private fun initUpdateAndAddAuthor() {
-        val type = intent.getStringExtra("type")
+    private fun initListener() {
+        val type = intent.getStringExtra(Constants.TYPE)
         if (type.equals("Edit")) {
-            idAuthor = intent.getLongExtra("id", -1)
-            val surname = intent.getStringExtra("surname")
-            val name = intent.getStringExtra("name")
-            val patronymic = intent.getStringExtra("patronymic")
+            idAuthor = intent.getLongExtra(Constants.ID, -1)
+            val surname = intent.getStringExtra(Constants.SURNAME)
+            val name = intent.getStringExtra(Constants.NAME)
+            val patronymic = intent.getStringExtra(Constants.PATRONYMIC)
             btnAdd.text = "Обновить"
             inpSurname.setText(surname)
             inpName.setText(name)
