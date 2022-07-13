@@ -49,7 +49,8 @@ class MainActivity : AppCompatActivity(), AuthorClickDeleteInterface, AuthorClic
     private fun subscribe() {
         viewModel.allAuthors.observe(this, Observer { list ->
             list?.let {
-                authorAdapter.updateList(it)
+                authorAdapter.swap(it)
+                //authorAdapter.updateList(it)
             }
         })
     }

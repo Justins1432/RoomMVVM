@@ -6,6 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.DiffUtil.DiffResult
 import androidx.recyclerview.widget.RecyclerView
 import com.example.rommmvvm.R
 import com.example.rommmvvm.model.Author
@@ -15,7 +17,7 @@ class AuthorAdapter(
     val authorClickDelete: AuthorClickDeleteInterface,
     val authorClick: AuthorClickInterface
 ) : RecyclerView.Adapter<AuthorAdapter.AuthorViewHolder>() {
-    private val authorlist = ArrayList<Author>()
+    private var authorlist = ArrayList<Author>()
 
     inner class AuthorViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val surnameAuthor: TextView = itemView.findViewById<TextView>(R.id.txtSurname)
@@ -35,11 +37,8 @@ class AuthorAdapter(
         holder.nameAuthor.text = authorlist[position].name
         holder.patronymicAuthor.text = authorlist[position].patronymic
 
-        holder.deleteAuthor.setOnClickListener{
-            val layoutPosition = holder.layoutPosition
+        holder.deleteAuthor.setOnClickListener {
             authorClickDelete.onDeleteIconClick(authorlist[position])
-            authorlist.removeAt(layoutPosition)
-            notifyItemRemoved(layoutPosition)
         }
 
         holder.itemView.setOnClickListener {
@@ -51,16 +50,19 @@ class AuthorAdapter(
         return authorlist.size
     }
 
-    fun updateList(updList: List<Author>){
+    fun updateList(updList: List<Author>) {
         authorlist.clear()
         authorlist.addAll(updList)
         notifyDataSetChanged()
     }
 
-    /*fun removeItem(position: Int){
-        authorlist.remove(position)
-
-    }*/
+    fun swap(newList: List<Author>){
+        val diffUtilCallback = AuthorsDiffUtilCallback(authorlist, newList)
+        val diffResult = DiffUtil.calculateDiff(diffUtilCallback)
+        authorlist.clear()
+        authorlist.addAll(newList)
+        diffResult.dispatchUpdatesTo(this)
+    }
 
 }
 
