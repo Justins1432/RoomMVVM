@@ -12,18 +12,5 @@ abstract class AuthorDatabase : RoomDatabase() {
     companion object {
         @Volatile
         private var INSTANCE: AuthorDatabase? = null
-
-        fun getDatabase(context: Context): AuthorDatabase {
-            return INSTANCE ?: synchronized(this) {
-                val instance = Room.databaseBuilder(
-                    context.applicationContext,
-                    AuthorDatabase::class.java,
-                    "author_database"
-                ).build()
-                INSTANCE = instance
-                instance
-            }
-        }
     }
-
 }
